@@ -1,0 +1,178 @@
+
+body{
+    background: #f2f2f2;
+    /* min-height: 100vh; */
+}
+
+.cont{
+   margin:  20px;
+   height: 100%;
+}
+
+.mes-header{
+    margin-right: 8px;
+}
+.headerDiaMes h6, .headerDiaMes h5{
+   margin: 0px;
+}
+.headerDiaMes h5{
+    font-size: 17px;
+}
+.headerDiaMes h6{
+    margin-top: 4px
+}
+.header{
+    padding: 10px;
+}
+.row_1::after{
+    content: '';
+    width: 100vw;
+    height: 1px;
+    background: #c8c8c8;  
+    box-shadow: -1px 7px 22px -10px rgba(161,137,161,1);
+
+}
+.anio-header{
+    text-decoration: none;
+}
+.logo{
+    padding: 10px;
+    font-size: 21px;
+    font-weight: 100;
+
+}
+.logos{
+    flex:1;
+}
+.logo .logos a i{
+    color: #626060;
+    font-weight: 100;
+}
+.barra{
+    background: black;
+        height: 100px;
+        color: #fff;
+        transition: all ease-in;
+        transition-delay: 1s;
+        z-index: 1;
+      
+}
+.barra:hover{
+width: 200px;
+}
+.muestra{
+    display: none;
+}
+.lateral{
+  height: 0px;
+  
+    background: #777777;
+    transition: all  ease 2s;
+}
+.calendar .dia{
+    text-align: center;
+    color: white!important;
+    padding: 0.1rem;
+    letter-spacing: .2rem;
+    font-size: 1.8rem;
+}
+@media(max-width: 520px){
+    .calendar .dia{
+        letter-spacing: 0px;
+        font-size: 0.8rem;
+        padding: 0px;
+    }
+}
+.calendar .dia:first-child{
+    border-radius: 3px 0 0 3px;
+}
+.calendar .dia:last-child{
+    border-radius: 0px 3px 3px 0px;
+}
+.calendar .dias{
+    color: #777777!important;
+    background: #f2f2f2!important;
+    text-align: center;
+    width: 100%;
+    padding: .5rem;
+}
+@media(max-width: 520px){
+    .calendar .dias{
+        padding: 0px;
+    }
+}
+.calendar_0{
+    height:10vh;
+}
+.calo{
+    min-height: 2rem!important;
+}
+.calendar .dias a{
+    border-radius: 100%;
+}
+@media(max-width: 320px){
+    .calendar .dias a{
+        padding: 0px!important;
+    }
+}
+/* clase que se le pone y saca a los días con js */
+.calendar .dias .redondel{
+    
+    -webkit-box-shadow: -1px 7px 22px -10px rgba(161,137,161,1);
+-moz-box-shadow: -1px 7px 22px -10px rgba(161,137,161,1);
+box-shadow: -1px 7px 22px -10px rgba(161,137,161,1);
+}
+.btn{
+    transition: ease 1.5s all;
+}
+.side{
+  height: 100%;
+}
+@media(max-width: 768px){
+    .side{
+        border-top: 1px solid #c8c8c8!important;
+    }
+}
+.card{
+    padding: 1rem 0 0 1rem;
+    margin: .5rem 0 0 .5rem;
+}
+.side{
+    overflow: scroll;
+    height: 90vh;
+}
+.botonSumar button{
+    -webkit-box-shadow: 3px 7px 15px -1px rgba(0,0,0,0.75);
+-moz-box-shadow: 3px 7px 15px -1px rgba(0,0,0,0.75);
+box-shadow: 3px 7px 15px -1px rgba(0,0,0,0.75);
+border: none;
+margin-bottom: 8px;
+}
+/* .botonSumar button h1{
+    font-size: 5rem;
+} */
+.botonSumar .modal textarea{
+    min-height: 9rem;
+}
+.card a{
+    -webkit-box-shadow: 3px 7px 15px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 7px 15px -1px rgba(0,0,0,0.75);
+    box-shadow: 3px 7px 15px -1px rgba(0,0,0,0.75);
+    cursor: pointer;
+}
+.card{
+    border: 2px solid rgba(51, 51, 50,.2);
+}
+.card .card-title{
+    border-bottom: 2px solid #bfbfbf;;
+    background-color: #e2e0e0e5;
+}
+.card .card-title a{
+    font-size: 3rem;
+}
+.card .card-body{
+   background-color:  #f3f3f3;
+}
+.modal-content form textarea{
+    resize: none;
+}
