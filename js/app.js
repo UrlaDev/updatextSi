@@ -155,6 +155,30 @@ dias.forEach((dia) => {
 let mas  = ko.getMonth();
 let anio  = ko.getFullYear();
 //escuhca el scroll EN el calendario nomás
+
+document.querySelector('.pagination').addEventListener('click', BtnMes);
+
+function BtnMes(e){
+    e.preventDefault();
+   if(e.target.classList.contains('adelante')){
+    if(mas === 11){
+        mas = -1;
+        anio++;
+       }
+       mas++ ; 
+  //incrementar el mes y llamar a la función
+  cargaFecha(mas, anio);
+  cargaVerde(mas,anio);       
+   }else if(e.target.classList.contains('atras')){
+    if(mas === 0){
+        mas = 12
+        anio--;
+    }
+    mas--;
+    cargaFecha(mas, anio);
+    cargaVerde(mas,anio); 
+   }
+}
 calo.onwheel = (e,mesHoy) =>{
      
     if(e.deltaY === -100){

@@ -42,10 +42,10 @@
      
           <main class="row calendar_0">  
                    <!--Comienzo calendario-->                 
-                  <div class="col-md-8 col-12 calo" >
+                  <div class="col-lg-8 col-12 calo" >
                         <div class="row calendo">
                          <div class="col">
-                          <div class="row  calendar ">
+                          <div class="row  calendar text-warning">
                                   <div class="col dia  ">LUN</div>
                                   <div class="col dia  ">MAR</div>
                                   <div class="col dia  ">MIER</div>
@@ -112,9 +112,9 @@
                      </div>
                    </div>
                    <!-- Boton grande verde que abre el modal para postear -->
-                   <div class="row botonSumar mt-0 ">
+                   <div class="row botonSumar mt-0 mb-3 justify-content-around align-items-center">
                                 <!-- <div class="col-1 p-0"></div> -->
-                        <div class="col-3 ml-4 p-0">
+                        <div class="col-5 ml-4 p-0">
                                 <button data-toggle="modal" data-target=".inputs" class="btn btn-success btn-block  pb-1 text-warning text-center"> <h1 class=" pb-0 "> <i class="medium material-icons">add</i></button>
                         </div>
                         <div class="modal fade inputs" tabindex="-1" role="dialog" aria-hidden="true">
@@ -126,24 +126,42 @@
                                                                 <h1 class="hoyModal"></h1>     
                                                                 <form action="">
                                                                 <div class="form-group mt-4">
-                                                                        <textarea id="txt" class="form-control  p-3 m-0" placeholder="Allright!"></textarea>
+                                                                        <textarea id="txt" class="form-control  p-3 m-0" placeholder="Escribe un título o un texto para identificar el enlace"></textarea>
                                                                 </div>
                                                                 <div class="form-group mt-4">
-                                                                        <textarea id="url" class="form-control p-3 m-0" placeholder="Allright!"></textarea>
+                                                                        <textarea id="url" class="form-control p-3 m-0" placeholder="aquí copia la url del enlace que te interesa almacenar"></textarea>
                                                                 </div>
                                                                 <div class="form-group d-flex justify-content-end">
-                                                                        <button type="submit" class="btn mt-0 btn-primary">Submit</button>
+                                                                        <button type="submit" class="btn mt-0 btn-primary" id="submito" >Submit</button>
                                                                 </div>
                                                                 </form>
                                                         </div>
                                                 </div><!--fin row inside modal-->
                                         </div>
                                   </div>
-                                </div>  <!--fin modal-->               
-                        </div><!--fin botón sumar-->
+                                </div>  <!--fin modal-->   
+                                <div class="col-6  justify-content-center">
+                                <nav aria-label="...">
+                                        <ul class="pagination mb-0 h-100">
+                                                <li class="page-item">
+                                                  <a href="#" class="btn btn-success p-4 atras">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                  </a>
+                                                </li>
+                                            
+                                                <li class="page-item">
+                                                  <a class="btn btn-success p-4 ml-3 adelante" href="#" >
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                  </a>
+                                                </li>
+                                              </ul>
+                                        </nav>      
+                                </div>     
+                        </div><!--fin row-botón sumar-->
+                       
                   </div><!--fin calendario--> 
                   <!--POSTS-->
-                  <div class="col-md-4 col-12
+                  <div class="col-lg-4 col-12
                   pl-0 border-left border-md-warning  border-0 side mb-0" id="cards">
                         </div><!--fin POSTS col-4-->
                                 
@@ -162,6 +180,12 @@
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/app.js" type="module"></script>
+        <script>
+                document.querySelector('#submito').addEventListener('click', () => {
+                        $('.modal').modal('hide');
+                })
+
+        </script>
 
    
 </body>

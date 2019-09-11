@@ -71,10 +71,11 @@ width: 200px;
 }
 .calendar .dia{
     text-align: center;
-    color: white!important;
+    /* color: white!important; */
     padding: 0.1rem;
     letter-spacing: .2rem;
     font-size: 1.8rem;
+    font-weight: 500;
 }
 @media(max-width: 520px){
     .calendar .dia{
@@ -146,7 +147,7 @@ box-shadow: -1px 7px 22px -10px rgba(161,137,161,1);
 -moz-box-shadow: 3px 7px 15px -1px rgba(0,0,0,0.75);
 box-shadow: 3px 7px 15px -1px rgba(0,0,0,0.75);
 border: none;
-margin-bottom: 8px;
+/* margin-bottom: 8px; */
 }
 /* .botonSumar button h1{
     font-size: 5rem;
@@ -175,4 +176,11 @@ margin-bottom: 8px;
 }
 .modal-content form textarea{
     resize: none;
+}
+
+
+nav ul.pagination li a{
+    -webkit-box-shadow: 3px 7px 15px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 7px 15px -1px rgba(0,0,0,0.75);
+    box-shadow: 3px 7px 15px -1px rgba(0,0,0,0.75);
 }
