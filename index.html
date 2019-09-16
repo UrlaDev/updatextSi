@@ -16,9 +16,9 @@
         <div class="row head d-flex row_1 justify-content-between ml-0 ">
             
             <div class="col header pb-0 d-flex justify-content-start">
-                    <div class="mes-header">
+                   <div class="mes-header">
                             <h1></h1>
-                    </div>
+                    </div> 
                     <div class="headerDiaMes d-flex flex-column">
                             <div class="dia-header">
                                         <h6></h6>
@@ -112,7 +112,7 @@
                      </div>
                    </div>
                    <!-- Boton grande verde que abre el modal para postear -->
-                   <div class="row botonSumar mt-0 mb-3 justify-content-around align-items-center">
+                   <div class="row botonSumar mt-0 mb-1 mb-md-3 justify-content-around align-items-center">
                                 <!-- <div class="col-1 p-0"></div> -->
                         <div class="col-5 ml-4 p-0">
                                 <button data-toggle="modal" data-target=".inputs" class="btn btn-success btn-block  pb-1 text-warning text-center"> <h1 class=" pb-0 "> <i class="medium material-icons">add</i></button>
@@ -170,7 +170,7 @@
       
         <!-- fin container -->
         </div>          
-                        
+                   <div id="modale" style="height:100%;"></div>     
                             
             
               
@@ -183,7 +183,25 @@
         <script>
                 document.querySelector('#submito').addEventListener('click', () => {
                         $('.modal').modal('hide');
-                })
+                });
+                document.querySelector('#calendar').addEventListener('click', (e)=>{
+                       if(window.screen.availWidth < 760){ 
+                        e.preventDefault()
+                        const calendarie = document.querySelector('.calo');
+                        if(calendarie.classList.contains('oculto')){
+                                calendarie.style.display = 'block';
+                                calendarie.classList.remove('oculto');
+                        }else{
+                                calendarie.style.display = 'none';
+                        calendarie.classList.add('oculto');
+                        
+                        }}
+
+                });
+                document.querySelector('.mes-header').addEventListener('click', (e) => {
+                        console.log(e)
+                        location.reload();
+                });
 
         </script>
 

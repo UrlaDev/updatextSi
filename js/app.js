@@ -68,7 +68,9 @@ tarjeta.addEventListener('click', borrarPost);
 
 
 };
+
    function mostrarPosts(){
+ 
        //limpiar
        document.getElementById('cards').innerHTML = '';
        //crear objectSTore
@@ -88,7 +90,7 @@ tarjeta.addEventListener('click', borrarPost);
                let html = `<div class="card p-0" data-post-id=${cursor.value.key}>
                                 <div class="card-body p-0">
                                 <div class="card-title  p-3">
-                                <a class="btn font-weight-bold text-uppercase  btn-success botonDia text-warning  d-flex justify-content-center ">
+                                <a class="btn font-weight-bold text-uppercase  btn-success botonDia text-warning  d-flex justify-content-center">
                                ${dia[diaPost][0]} ${fechaPost.getDate()} ${month[mesPost][1]}</a>
                                    </div>
                                 <p class="card-subtitle text-right text-muted px-3 mb-2">
@@ -97,16 +99,45 @@ tarjeta.addEventListener('click', borrarPost);
                                 </span></p>
                                 <p class="card-text p-3">${cursor.value.post}
                                 </p>
-                                <div class="w-100 p-3 d-flex justify-content-between"> 
+                                <div class="w-100 p-3 d-flex justify-content-between align-items-center"> 
                                 <a href="${cursor.value.url}" class="btn btn-info" target="_blank">ir</a>
+                                <a href="#" class="fullScreen text-center"><i class="material-icons" data-id=${cursor.value.key}>fullscreen</i></a>  
                                 <a href="#" class="btn btn-danger" data-post-id=${cursor.value.key}>borrar</a>                               
                                  </div>
                                 </div>
-                           </div><!--fin card-->`;
+                           </div>
+                        
+                           </div>
+                           
+                           
+                           <!--fin card-->`;
                            document.getElementById('cards').innerHTML += html;
                            cursor.continue();
 
-                           
+                               //mostrar post en modal
+   
+    // btnFulScreen.addEventListener('click', (e) =>{
+    //     console.log('GIOOAJHKAHAJKHDS')
+    //   //  $('.postFul').modal()
+    //   let id = Number(e.target.parentElement.parentElement.parentElement.getAttribute('data-post-id'));
+    //   console.log(e.target.parentElement.parentElement)
+    //   let objectStore = DB.transaction('posts').objectStore('posts');
+    //   objectStore.openCursor(id).onsuccess = function(e){
+    //       let cursor = e.target.result;
+    //       if(cursor){
+          
+    //           let txtPOst = cursor.value.post;
+    //           console.log(txtPOst);
+             
+    //       }else{
+    //          return;
+    //       }
+    //   }
+    
+    
+    
+    
+    // });
                         
                        
            }else('no cursor')
@@ -114,10 +145,82 @@ tarjeta.addEventListener('click', borrarPost);
 
        }
  
-    
+
  
 
 }
+document.getElementById('cards').addEventListener('click', quefenomeno);
+function quefenomeno(e){
+let id = Number( e.target.getAttribute('data-id'));
+   if(id){
+  
+              //en indexed DB se utilizan las transacciones
+              let objectStore = DB.transaction('posts').objectStore('posts');
+              objectStore.openCursor(id).onsuccess = function(e){
+                  let cursor = e.target.result;
+                  if(cursor){
+                  
+                    let fechaPost = cursor.value.fecha;
+                    let diaPost =  fechaPost.getDay();
+                    let mesPost =  fechaPost.getMonth();
+                    let anioPost =  fechaPost.getFullYear();
+                  
+               let html =
+               
+               `
+               <!--tres divs para el modal-->
+               <div class="modal fade posteos" tabindex="-1" role="dialog" aria-hidden="true">
+               <div class="modal-dialog modal-dialog-centered modal-lg">
+                       <!-- contenido del modal -->
+                       <div class="modal-content">
+
+               <!--post original-->
+               <div class="card p-0" data-post-id=${cursor.value.key}>
+               <div class="card-body p-0">
+               <div class="card-title  p-3">
+               <a class="btn font-weight-bold text-uppercase  btn-success botonDia text-warning  d-flex justify-content-center">
+              ${dia[diaPost][0]} ${fechaPost.getDate()} ${month[mesPost][1]}</a>
+                  </div>
+               <p class="card-subtitle text-right text-muted px-3 mb-2">
+               <span class="badge badge-secondary">
+               ${cursor.value.fecha.getHours()}:${cursor.value.fecha.getMinutes()<10 ? `0`+cursor.value.fecha.getMinutes(): cursor.value.fecha.getMinutes()}
+               </span></p>
+               <p class="card-text p-3">${cursor.value.post}
+               </p>
+               <div class="w-100 p-3 d-flex justify-content-between align-items-center"> 
+               <a href="${cursor.value.url}" class="btn btn-info" target="_blank">ir</a>
+               <a href="#" class="fullScreen text-center"><i class="material-icons" data-dismiss="modal" data-id=${cursor.value.key}>fullscreen</i></a>  
+               <a href="#" class="btn btn-danger" data-post-id=${cursor.value.key}>borrar</a>                               
+                </div>
+               </div>
+          </div>
+       
+          </div>
+          
+          
+          <!--fin card-->
+          <!--post original fin-->
+          <!--cierre modal-->
+          </div>
+          </div>
+          </div>
+          
+          `;
+          document.getElementById('modale').innerHTML = html;
+          $('.posteos').modal();
+
+                    
+
+                  }else{
+                     console.log('hola')
+                  }
+              }
+    
+
+
+   }
+}
+
 function borrarPost(e){
     if(e.target.classList.contains('btn-danger')){
         let Id = Number(e.target.getAttribute('data-post-id'));
@@ -203,7 +306,7 @@ calo.onwheel = (e,mesHoy) =>{
 }
 //función que imprime el calendario
 function cargaFecha(m =  ko.getMonth(), a = ko.getFullYear(), diaPost = null, sipi = true){
-    console.log(diaPost)
+  
     if(sipi){
     //limpia resultados del mes del scroll pasado
    dias.forEach((dia) => {
@@ -223,12 +326,12 @@ function cargaFecha(m =  ko.getMonth(), a = ko.getFullYear(), diaPost = null, si
     let meso = month[mesi][1];
     //instancia Date() en primer día del mes seleccionado
     var PrimeroDefechaSeleccionada = new Date(Date.parse( `1 ${mes}, ${a}` ));
-    console.log(PrimeroDefechaSeleccionada)
+  
     //obtiene el primer día del mes seleccionado
     var day = PrimeroDefechaSeleccionada.getDay();
     //otiene el id del primer día del mes de la fecha seleccionada
     let primero = dia[day][1];
-    console.log(primero,'SOY PRIMERO')
+
     //imprime arriba a la derecha
     mesGrande.textContent = meso;
     anioGrande.textContent = a;  
@@ -257,7 +360,7 @@ function cargaFecha(m =  ko.getMonth(), a = ko.getFullYear(), diaPost = null, si
     for(let i = 1; i <= mesFIn; i++){
           const primeroDataNumber = Number(primero);
            let diar = document.getElementById( `${primeroDataNumber + i}` );
-          console.log(diar)
+        
          
            if(diar){
            diar.textContent = i+1;
@@ -270,7 +373,7 @@ function cargaFecha(m =  ko.getMonth(), a = ko.getFullYear(), diaPost = null, si
 };
   function cargaVerde(m =  ko.getMonth(), a = ko.getFullYear()){
  //trae los post de la indexedDB
- console.log(m,a,'SOY EN CARGAVERDE')
+
  let objectStore = DB.transaction('posts').objectStore('posts');
  //esto retorna una petición
  objectStore.openCursor().addEventListener('success', coso, false); 
@@ -278,8 +381,7 @@ function cargaFecha(m =  ko.getMonth(), a = ko.getFullYear(), diaPost = null, si
      let cursor = e.target.result;
      if(cursor){
       let fechaPOst = cursor.value.fecha;
-      console.log(fechaPOst, 'SOY EL QUE TRAJO CURSOR DESDE DB EN CARGAVERDE')
-      console.log(fechaPOst.getMonth(),fechaPOst.getFullYear())
+
       if(m == fechaPOst.getMonth() && a == fechaPOst.getFullYear()){
                        botonPostDia(false,cursor.key);
                           cursor.continue();
@@ -314,8 +416,7 @@ function seleccionadoDia(e){
                     let mesCur = cursor.value.fecha.getMonth();
                     let anioCur = cursor.value.fecha.getFullYear();
                     let fechaCur = `${mesCur}-${diaCur}-${anioCur}`;
-                     console.log(fecha);
-                     console.log(fechaCur);
+                    
                     if(fecha == fechaCur){
                         let html = `<div class="card p-0" data-post-id=${cursor.value.key}>
                         <div class="card-body p-0">
@@ -338,7 +439,7 @@ function seleccionadoDia(e){
                    document.getElementById('cards').innerHTML += html;
                    cursor.continue();
                     }else{
-                        console.log('no-holis')
+                      
                         cursor.continue();
                     };
                     
@@ -365,22 +466,22 @@ function botonPostDia(e, dio){
                 let fechaPOst = cursor.value.fecha;
                 cargaFecha(fechaPOst.getMonth(),fechaPOst.getFullYear(),fechaPOst.getDate(), true);
             }else{
-                console.log(e.target, 'NO CURSOR')
+               
             }
         }
     }}else if(dio){
         // e.target.classList.add('redondel', 'btn-success');
-        console.log(dio, 'soy DIO'); 
+     
         let objectStore = DB.transaction('posts').objectStore('posts');
         objectStore.openCursor(dio).onsuccess = function(e){
             let cursor = e.target.result;
             if(cursor){
                
                 let fechaPOst = cursor.value.fecha;
-                console.log(fechaPOst)
+               
                 cargaFecha(fechaPOst.getMonth(),fechaPOst.getFullYear(),fechaPOst.getDate(), false);
             }else{
-                console.log(e.target, 'NO CURSOR')
+              
             }
         }
               
